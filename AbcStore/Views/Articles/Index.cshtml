@@ -21,6 +21,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Cijena)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FileName)
+        </th>
         <th></th>
     </tr>
 
@@ -36,9 +39,12 @@
             @Html.DisplayFor(modelItem => item.Cijena)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+            @Html.DisplayFor(modelItem => item.FileName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id })
         </td>
     </tr>
 }

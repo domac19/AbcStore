@@ -2,15 +2,12 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using AbcStore.Data;
 using AbcStore.Models;
-using AbcStore.ViewModel;
 
 namespace AbcStore.Controllers
 {
@@ -19,7 +16,6 @@ namespace AbcStore.Controllers
         private AbcStoreContext db = new AbcStoreContext();
 
         // GET: Articles
-        [HttpGet]
         public ActionResult Index()
         {
             return View(db.Articles.ToList());

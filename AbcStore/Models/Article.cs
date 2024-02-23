@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
@@ -11,5 +13,11 @@ namespace AbcStore.Models
         public string Naziv { get; set; }
         public string Kategorija { get; set; }
         public string Cijena { get; set; }
+
+        [DisplayName("Upload image")]
+        public string Image { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase ImageFile { get; set; }
     }
 }

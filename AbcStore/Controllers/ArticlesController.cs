@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -37,6 +38,7 @@ namespace AbcStore.Controllers
         }
 
         // GET: Articles/Create
+        [HttpGet]
         public ActionResult Create()
         {
             return View();
@@ -47,8 +49,14 @@ namespace AbcStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Naziv,Kategorija,Cijena")] Article article)
+        public ActionResult Create(Article article)
         {
+            string fileName = Path.GetFileNameWithoutExtension(article.ImageFile.FileName);
+            string extension = Path.GetExtension(article.ImageFile.FileName);
+            article.Image = "../Images/" + fileName;
+            fileName = Path.Combine(Server.MapPath("../Images/"), fileName);
+            article.ImageFile.SaveAs(fileName);
+
             if (ModelState.IsValid)
             {
                 db.Articles.Add(article);
@@ -79,7 +87,7 @@ namespace AbcStore.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Naziv,Kategorija,Cijena")] Article article)
+        public ActionResult Edit(Article article)
         {
             if (ModelState.IsValid)
             {

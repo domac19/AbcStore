@@ -15,14 +15,12 @@ namespace AbcStore.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Na ovoj stranici se nalazi dodatni kontakt.";
 
             return View();
         }

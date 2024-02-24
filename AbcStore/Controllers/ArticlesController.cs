@@ -51,12 +51,19 @@ namespace AbcStore.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(Article article)
         {
-            string fileName = Path.GetFileNameWithoutExtension(article.ImageFile.FileName);
-            string extension = Path.GetExtension(article.ImageFile.FileName);
-            fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
-            article.Image = "../Images/" + fileName;
-            fileName = Path.Combine(Server.MapPath("../Images/"), fileName);
-            article.ImageFile.SaveAs(fileName);
+            try
+            {
+                string fileName = Path.GetFileNameWithoutExtension(article.ImageFile.FileName);
+                string extension = Path.GetExtension(article.ImageFile.FileName);
+                fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                article.Image = "../Images/" + fileName;
+                fileName = Path.Combine(Server.MapPath("../Images/"), fileName);
+                article.ImageFile.SaveAs(fileName);
+            }
+            catch (Exception ex)
+            {
+                return View("Error", ex);
+            }
 
             if (ModelState.IsValid)
             {

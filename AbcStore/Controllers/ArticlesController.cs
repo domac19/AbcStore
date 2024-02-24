@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.Entity;
 using System.IO;
@@ -9,6 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using AbcStore.Data;
 using AbcStore.Models;
+using OfficeOpenXml;
 
 namespace AbcStore.Controllers
 {
@@ -129,6 +131,33 @@ namespace AbcStore.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public void ExportExcel()
+        {
+            var collection = db.Articles.ToList();
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
+            ExcelPackage Ep = new ExcelPackage();
+            ExcelWorksheet Sheet = Ep.Workbook.Worksheets.Add("Report");
+            Sheet.Cells["A1"].Value = "Naziv";
+            Sheet.Cells["B1"].Value = "Kategorija";
+            Sheet.Cells["C1"].Value = "Cijena";
+            Sheet.Cells["D1"].Value = "Image";
+            int row = 2;
+            foreach (var item in collection)
+            {
+                Sheet.Cells[string.Format("A{0}", row)].Value = item.Naziv;
+                Sheet.Cells[string.Format("B{0}", row)].Value = item.Kategorija;
+                Sheet.Cells[string.Format("C{0}", row)].Value = item.Cijena;
+                Sheet.Cells[string.Format("D{0}", row)].Value = item.Image;
+                row++;
+            }
+            Sheet.Cells["A:AZ"].AutoFitColumns();
+            Response.Clear();
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.AddHeader("content-disposition", "attachment: filename=" + "Report.xlsx");
+            Response.BinaryWrite(Ep.GetAsByteArray());
+            Response.End();
         }
     }
 }

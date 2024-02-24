@@ -45,14 +45,13 @@ namespace AbcStore.Controllers
         }
 
         // POST: Articles/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Article article)
         {
             string fileName = Path.GetFileNameWithoutExtension(article.ImageFile.FileName);
             string extension = Path.GetExtension(article.ImageFile.FileName);
+            fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
             article.Image = "../Images/" + fileName;
             fileName = Path.Combine(Server.MapPath("../Images/"), fileName);
             article.ImageFile.SaveAs(fileName);
@@ -68,6 +67,7 @@ namespace AbcStore.Controllers
         }
 
         // GET: Articles/Edit/5
+        [HttpGet]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -83,8 +83,6 @@ namespace AbcStore.Controllers
         }
 
         // POST: Articles/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Article article)

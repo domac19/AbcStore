@@ -22,13 +22,13 @@ CREATE PROCEDURE Join_Tables
 AS
 BEGIN
 SELECT
-    p.Person,
+    p.People,
     pe.Persons
 FROM
     -- this is your "base" table - where most of the info exists
-    Person.Person p
+    People.People p
 INNER JOIN 
     -- join to the e-mail table - based on "BusinessEntityID", to get e-mail address
-    Person.Persons pe ON pe.KorisnikId = p.Id
+    People.Persons pe ON pe.KorisnikId = p.Id
 END
 GO

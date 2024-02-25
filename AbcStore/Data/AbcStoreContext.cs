@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using AbcStore.Models;
 using System.Data.Entity;
-using System.Linq;
-using System.Web;
 
 namespace AbcStore.Data
 {
@@ -12,8 +9,8 @@ namespace AbcStore.Data
         {
         }
 
-        public System.Data.Entity.DbSet<AbcStore.Models.Article> Articles { get; set; }
-        public System.Data.Entity.DbSet<AbcStore.Models.Person> Person { get; set; }
-        public System.Data.Entity.DbSet<AbcStore.Models.Persons> Persons { get; set; }
+        public DbSet<Article> Articles { get; set; }
+        public DbSet<Person> Person { get; set; }
+        public DbSet<Persons> Persons { get; set; }
     }
 }

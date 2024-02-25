@@ -7,13 +7,13 @@ namespace AbcStore.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.4")]
-    public sealed partial class AddedTwoPropertiesForImage : IMigrationMetadata
+    public sealed partial class ChangedTypeForOIB : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddedTwoPropertiesForImage));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ChangedTypeForOIB));
         
         string IMigrationMetadata.Id
         {
-            get { return "202402231839014_AddedTwoPropertiesForImage"; }
+            get { return "202402251206124_ChangedTypeForOIB"; }
         }
         
         string IMigrationMetadata.Source

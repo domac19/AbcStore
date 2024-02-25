@@ -3,19 +3,16 @@
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class AddedTwoPropertiesForImage : DbMigration
+    public partial class NewTablePerson : DbMigration
     {
         public override void Up()
-        {
+        {            
             CreateTable(
-                "dbo.Articles",
+                "dbo.People",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
-                        Naziv = c.String(),
-                        Kategorija = c.String(),
-                        Cijena = c.String(),
-                        Image = c.String(),
+                        Korisnik = c.String(),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -23,7 +20,7 @@
         
         public override void Down()
         {
-            DropTable("dbo.Articles");
+            DropTable("dbo.People");
         }
     }
 }
